@@ -1,34 +1,37 @@
+import os
+
 import discord
-from discord.ext import commands
-import config
+
+# class MyClient(discord.Client):
+#     async def on_ready(self):
+#         print("Logged on as {0}!".format(self.user))
+#
+#
+# client = MyClient()
+# client.run(os.environ["DISCORD_TOKEN"])
+
+bot = discord.Bot()
+bot.auto_sync_commands = True
 
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print("Logged on as {0}!".format(self.user))
-
-    async def on_message(self, message):
-        if message.author == self.user:
-            return
-
-        if message.content.startswith("$hello"):
-            await message.channel.send("Hello World!")
+@bot.event
+async def on_ready():
+    channel = bot.get_channel(1212927556911767645)
+    await channel.send('Bot is now running!\n'
+                       f'Current Time: {discord.utils.utcnow()}')
+    await bot.sync_commands()
 
 
-intents = discord.Intents.default()
-intents.message_content = True
-
-bot = commands.Bot()
-
-
-# Add the guild ids in which the slash command will appear.
-# If it should be in all, remove the argument, but note that
-# it will take some time (up to an hour) to register the
-# command if it's for all guilds.
-@bot.slash_command(name="first_slash", guild_ids=[1212927555330383912/1212927556911767643])
-async def first_slash(ctx):
-    await ctx.respond("You executed the slash command!")
+@bot.slash_command(name='hello', description='Say hello!', guild_ids=[1212927555330383912])
+async def hello(command_context):
+    await command_context.respond(f'Hello, {command_context.author.name}!', ephemeral=True)
 
 
-client = MyClient(intents=intents)
-client.run(config.discord_token)
+@bot.slash_command(name='announcement', description='Make an announcement!', guild_ids=[1212927555330383912])
+async def announcement(command_context, announcement_message: discord.Option(str, "Enter your announcement")):
+    await command_context.respond(f'@everyone\n'
+                                  f'\n'
+                                  f'{announcement_message}')
+
+
+bot.run(os.environ["DISCORD_TOKEN"])
