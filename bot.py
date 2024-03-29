@@ -2,13 +2,9 @@ import os
 
 import discord
 
-# class MyClient(discord.Client):
-#     async def on_ready(self):
-#         print("Logged on as {0}!".format(self.user))
-#
-#
-# client = MyClient()
-# client.run(os.environ["DISCORD_TOKEN"])
+import logging
+
+logging.basicConfig(filename='bot.log', level=logging.DEBUG)  # Creates a log file
 
 bot = discord.Bot()
 bot.auto_sync_commands = True
@@ -16,7 +12,7 @@ bot.auto_sync_commands = True
 
 @bot.event
 async def on_ready():
-
+    logging.info('Bot logged in and ready!')
     channel = bot.get_channel(int(os.environ['BOT_CHANNEL']))
     await channel.send('Bot is now running!\n'
                        f'Current Time: {discord.utils.utcnow()}')
