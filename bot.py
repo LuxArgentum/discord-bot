@@ -23,13 +23,13 @@ async def on_ready():
     await bot.sync_commands()
 
 
-@bot.slash_command(name='hello', description='Say hello!', guild_ids=[int(os.environ['SERVER_ID'])])
+@bot.slash_command(name='hello', description='Say hello!', guild_ids=[os.environ['SERVER_ID']])
 async def hello(command_context):
     # TODO: Change code from author_name to pinging the user that called the command.
     await command_context.respond(f'Hello, {command_context.author.name}!', ephemeral=True)
 
 
-@bot.slash_command(name='announcement', description='Make an announcement!', guild_ids=[int(os.environ['SERVER_ID'])])
+@bot.slash_command(name='announcement', description='Make an announcement!', guild_ids=[os.environ['SERVER_ID']])
 async def announcement(command_context, announcement_message: discord.Option(str, "Enter your announcement")):
     await command_context.respond(f'@everyone\n'
                                   f'\n'
