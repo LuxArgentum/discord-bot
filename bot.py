@@ -76,7 +76,9 @@ class share_scripture_modal(discord.ui.Modal):
         embed.add_field(name="Verse", value=self.children[0].value)
         embed.add_field(name="Scripture", value=self.children[1].value, inline=False)
         embed.add_field(name="Summary", value=self.children[2].value, inline=False)
-        await interaction.response.send(embeds=[embed])
+        channel = bot.get_channel(int(os.environ['QUIET_TIME_CHANNEL']))
+        await channel.send(embeds=[embed])
+        await interaction.response.send_message("Your scripture has been shared!", ephemeral=True)
 
 
 @bot.slash_command(name="share-scripture", description="Share a scripture!", guild_ids=[os.environ['SERVER_ID']])
