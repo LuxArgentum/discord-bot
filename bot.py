@@ -58,4 +58,4 @@ async def modal_slash(ctx: discord.ApplicationContext):
     await ctx.send_modal(modal)
 
 
-bot.run(os.environ["DISCORD_TOKEN"], host='0.0.0.0', port=port)
+bot.run(os.environ["DISCORD_TOKEN"])

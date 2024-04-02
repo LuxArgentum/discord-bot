@@ -15,6 +15,4 @@ RUN python -m pip install -r requirements.txt
 
 COPY bot.py ./
 
-ENV $(cat .env)
-
 CMD ["python", "bot.py"]
