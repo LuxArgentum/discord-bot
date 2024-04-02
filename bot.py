@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands
 from discord import default_permissions
 
+port = int(os.environ.get('PORT', 5000))  # Default to 5000 for local testing
+
 bot = discord.Bot()
 bot.auto_sync_commands = True
 
@@ -56,4 +58,4 @@ async def modal_slash(ctx: discord.ApplicationContext):
     await ctx.send_modal(modal)
 
 
-bot.run(os.environ["DISCORD_TOKEN"])
+bot.run(os.environ["DISCORD_TOKEN"], host='0.0.0.0', port=port)
