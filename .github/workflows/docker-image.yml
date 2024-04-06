@@ -31,4 +31,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/discord-bot:latest,ghcr.io/${{ github.repository_owner }}/discord-bot:${{ github.run_id }}
+        tags: ghcr.io/luxargentum/discord-bot:latest,ghcr.io/luxargentum/discord-bot:${{ github.run_id }}
