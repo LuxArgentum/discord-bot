@@ -13,6 +13,7 @@ RUN python -m pip install -r requirements.txt
 
 # Stage 3
 
+COPY bot_instance.py ./
 COPY bot.py ./
 COPY commands/ ./commands
 COPY modals/ ./modals
