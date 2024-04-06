@@ -12,3 +12,7 @@ class EventHandlers(commands.Cog):
         channel = self.bot.get_channel(int(os.environ['BOT_CHANNEL']))
         await channel.send(f"Bot is ready. Logged in as {self.bot.user}")
         await self.bot.sync_commands()
+
+
+def setup(bot):
+    bot.add_cog(EventHandlers(bot))
