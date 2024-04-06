@@ -2,7 +2,7 @@ import os
 
 import discord
 
-from bot import bot
+from bot_instance import bot
 
 
 class ShareScriptureModal(discord.ui.Modal):
